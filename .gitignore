@@ -1,6 +1,11 @@
 # Node stuffs lol
 node_modules/
 
-# secret stuff (its just module.exports.env = {DB_HOST:"aasd", etc} )
+# secret stuff (check example if you want to make one)
 env.js
 env.ts
+
+# I've decided not to include build JS into version controll.
+# You can run `npm run build` or `npm run watch` to get the JS anyways
+lib/**/*
+
