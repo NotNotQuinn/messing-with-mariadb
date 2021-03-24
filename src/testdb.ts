@@ -15,28 +15,9 @@ export class DataBaseInteraction {
     async AddUser(name:string) {
         let conn: mariadb.Pool;
         try {
-            this.pool.getConnection()
-            .then(conn => {
-                conn.query("SELECT 1 as val")
-                .then(rows => {
-                    console.log(rows)
-                    conn.query("INSERT INTO `testdb`.`users` (`NAME`) VALUES (?);", [name])
-                    .then((res)=>{
-                        console.log(`'${name}': #${res.insertId}`)
-                    }).catch((err) => {
-                        throw err;
-                    })
-                }).catch((err) => {
-                    throw err;
-                })
-                .finally(()=>{
-                    conn.end().catch((err) => {
-                        throw err;
-                    })
-                })
-          }).catch((err) => {
-              throw err;
-          })
+            let conn = await this.pool.getConnection();
+            let res = await conn.query("INSERT INTO `testdb`.`users` (`NAME`) VALUES (?);", [name])
+            console.log(`'${name}': #${res.insertId}`)
         } catch (err) {
           throw err;
         } finally {

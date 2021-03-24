@@ -1,5 +1,5 @@
 import env from "./env.js";        // env stuff
-// *******************************Z
+// *********************************
 
 import { DataBaseInteraction } from "./testdb";
 import Propmt from "prompt-sync";
@@ -12,12 +12,13 @@ const db = new DataBaseInteraction({
     connectionLimit: 50,
 });
 
-db.AddUser("poggers")
 
-// let prompt = Propmt({ sigint: true })
-// while (true) {
-//     let name = prompt({ ask: "> " })
-//     console.log(name)
-//     db.AddUser(name)
-// }
+let prompt = Propmt({ sigint: true });
+(async () => {
+    for (let i = 0; i < 5; i++) {
+        let name = prompt("> ");
+        await db.AddUser(name);
+        console.log(`${name} added to db`);
+    }
+})();
 
