@@ -11,14 +11,17 @@ const db = new DataBaseInteraction({
     port: parseInt(env.DB_PORT),
     connectionLimit: 50,
 });
-
+function rand(max:number) {
+    return Math.floor(Math.random() * max)
+}
 
 let prompt = Propmt({ sigint: true });
 (async () => {
-    for (let i = 0; i < 5; i++) {
-        let name = prompt("> ");
-        await db.AddUser(name);
-        console.log(`${name} added to db`);
+    while (true) {
+        let NAME = prompt("> ");
+        let TWITCH_ID = rand(999999999);
+        await db.AddUser({ NAME, TWITCH_ID });
+        console.log(`${NAME} added to db with twitch id ${TWITCH_ID}`);
     }
 })();
 
